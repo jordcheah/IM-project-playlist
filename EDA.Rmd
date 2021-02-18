@@ -1,0 +1,385 @@
+---
+title: ''
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+
+#Loading main data
+slice1 <- read.csv("D:/Jord/Documents/Dissertation/spotifymilplaylistdata/data/final_data_0_999.csv")
+slice1$playlist_id <- as.factor(slice1$playlist_id)
+```
+
+# Journey Lineplots
+
+```{r LinePlots}
+#Plotting feature journey across playlist length
+#Danceability
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = danceability, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#speechiness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = speechiness, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Loudness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = loudness, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Speechiness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = speechiness, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Acousticness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = acousticness, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Instrumentalness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = instrumentalness, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Liveness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = liveness, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Valence
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = valence, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Tempo
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  filter(playlist_id %in% sample(levels(playlist_id),5)) %>% #Random sample
+  ggplot(aes(x = song, y = tempo, color = playlist_id)) +
+  geom_line(show.legend = FALSE)
+
+#Select fewer playlists to plot maybe
+#Density plots?
+```
+
+# Journey Boxplots
+
+```{r Boxplots}
+#Boxplots by song no. in playlist, see distributions
+#Danceability
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = danceability)) +
+  geom_boxplot(show.legend = FALSE)
+
+#Energy
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = energy)) +
+  geom_boxplot(show.legend = FALSE)
+
+#Loudness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = loudness)) +
+  geom_boxplot(show.legend = FALSE)
+
+#Speechiness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = speechiness)) +
+  geom_boxplot(show.legend = FALSE)
+
+#Acousticness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = acousticness)) +
+  geom_boxplot(show.legend = FALSE)
+
+## time series analysis, test for trend?
+## autocorrelation? no trends -> stationarity
+
+#Instrumentalness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = instrumentalness)) +
+  geom_boxplot(show.legend = FALSE)
+
+#examine for the boxplots
+
+#Liveness
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = liveness)) +
+  geom_boxplot(show.legend = FALSE)
+
+#Valence
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = valence)) +
+  geom_boxplot(show.legend = FALSE)
+
+#test for normality? applies to all vars
+
+#Tempo
+slice1 %>% 
+  group_by(playlist_id) %>% 
+  mutate(song = row_number()) %>%
+  ggplot(aes(x = as.factor(song), y = tempo)) +
+  geom_boxplot(show.legend = FALSE)
+
+```
+
+# Alternation tests
+```{r Runs}
+library(randtests)
+slice1$playlist_id <- as.numeric(slice1$playlist_id)
+
+##re-examine what its doing
+##maybe look more into autocorrelation
+
+#Danceability
+danceability.values <- slice1 %>%
+  select(playlist_id, danceability)
+
+danceability.p.values <- data.frame()
+
+for (i in danceability.values$playlist_id) {
+  filtered_danceability <- danceability.values %>%
+                             filter(playlist_id==i) %>%
+                             select(danceability) %>%
+                             unlist(use.names = FALSE)
+  
+  danceability.p.values[i,1] <- runs.test(filtered_danceability)$p.value
+}
+
+names(danceability.p.values) <- c("p.values")
+
+danceability.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Energy
+energy.values <- slice1 %>%
+  select(playlist_id, energy)
+
+energy.p.values <- data.frame()
+
+for (i in energy.values$playlist_id) {
+  filtered_energy <- energy.values %>%
+                             filter(playlist_id==i) %>%
+                             select(energy) %>%
+                             unlist(use.names = FALSE)
+  
+  energy.p.values[i,1] <- runs.test(filtered_energy)$p.value
+}
+
+names(energy.p.values) <- c("p.values")
+
+energy.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Loudness
+loudness.values <- slice1 %>%
+  select(playlist_id, loudness)
+
+loudness.p.values <- data.frame()
+
+for (i in loudness.values$playlist_id) {
+  filtered_loudness <- loudness.values %>%
+                             filter(playlist_id==i) %>%
+                             select(loudness) %>%
+                             unlist(use.names = FALSE)
+  
+  loudness.p.values[i,1] <- runs.test(filtered_loudness)$p.value
+}
+
+names(loudness.p.values) <- c("p.values")
+
+loudness.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Speechiness
+speechiness.values <- slice1 %>%
+  select(playlist_id, speechiness)
+
+speechiness.p.values <- data.frame()
+
+for (i in speechiness.values$playlist_id) {
+  filtered_speechiness <- speechiness.values %>%
+                             filter(playlist_id==i) %>%
+                             select(speechiness) %>%
+                             unlist(use.names = FALSE)
+  
+  speechiness.p.values[i,1] <- runs.test(filtered_speechiness)$p.value
+}
+
+names(speechiness.p.values) <- c("p.values")
+
+speechiness.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Acousticness
+acousticness.values <- slice1 %>%
+  select(playlist_id, acousticness)
+
+acousticness.p.values <- data.frame()
+
+for (i in acousticness.values$playlist_id) {
+  filtered_acousticness <- acousticness.values %>%
+                             filter(playlist_id==i) %>%
+                             select(acousticness) %>%
+                             unlist(use.names = FALSE)
+  
+  acousticness.p.values[i,1] <- runs.test(filtered_acousticness)$p.value
+}
+
+names(acousticness.p.values) <- c("p.values")
+
+acousticness.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Instrumentalness
+instrumentalness.values <- slice1 %>%
+  select(playlist_id, instrumentalness)
+
+instrumentalness.p.values <- data.frame()
+
+for (i in instrumentalness.values$playlist_id) {
+  filtered_instrumentalness <- instrumentalness.values %>%
+                             filter(playlist_id==i) %>%
+                             select(instrumentalness) %>%
+                             unlist(use.names = FALSE)
+  
+  instrumentalness.p.values[i,1] <- runs.test(filtered_instrumentalness)$p.value
+}
+
+names(instrumentalness.p.values) <- c("p.values")
+
+instrumentalness.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Liveness
+liveness.values <- slice1 %>%
+  select(playlist_id, liveness)
+
+liveness.p.values <- data.frame()
+
+for (i in liveness.values$playlist_id) {
+  filtered_liveness <- liveness.values %>%
+                             filter(playlist_id==i) %>%
+                             select(liveness) %>%
+                             unlist(use.names = FALSE)
+  
+  liveness.p.values[i,1] <- runs.test(filtered_liveness)$p.value
+}
+
+names(liveness.p.values) <- c("p.values")
+
+liveness.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Valence
+valence.values <- slice1 %>%
+  select(playlist_id, valence)
+
+valence.p.values <- data.frame()
+
+for (i in valence.values$playlist_id) {
+  filtered_valence <- valence.values %>%
+                             filter(playlist_id==i) %>%
+                             select(valence) %>%
+                             unlist(use.names = FALSE)
+  
+  valence.p.values[i,1] <- runs.test(filtered_valence)$p.value
+}
+
+names(valence.p.values) <- c("p.values")
+
+valence.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+
+#Tempo
+tempo.values <- slice1 %>%
+  select(playlist_id, tempo)
+
+tempo.p.values <- data.frame()
+
+for (i in tempo.values$playlist_id) {
+  filtered_tempo <- tempo.values %>%
+                             filter(playlist_id==i) %>%
+                             select(tempo) %>%
+                             unlist(use.names = FALSE)
+  
+  tempo.p.values[i,1] <- runs.test(filtered_tempo)$p.value
+}
+
+names(tempo.p.values) <- c("p.values")
+
+tempo.p.values %>%
+    ggplot(aes(x=p.values)) +
+    geom_histogram(bins=50)
+```
+
+
+```{r LengthHistogram, eval=FALSE, include=FALSE}
+#Playlist length histogram
+lengths_slice_1 <- read.table("D:/Jord/Documents/Dissertation/spotifymilplaylistdata/data/lengths_slice_1.csv", quote="\"", comment.char="")
+
+names(lengths_slice_1) <- c("Playlist lengths")
+hist(lengths_slice_1$`Playlist lengths`,
+     main='Histogram of playlist lengths', xlab='Playlist lengths', 
+     breaks=seq(from=0, to=250, by=5))
+
+
+
+ggplot(aes(x = song, y = danceability, color = playlist_name)) +
+  geom_line()
+```
+
